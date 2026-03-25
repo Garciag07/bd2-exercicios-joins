@@ -146,3 +146,7 @@ INSERT INTO final_space_db.Character(
     (28, 'Meowlapeño', 3, 2),
     (29, 'Fraskenhaur', NULL, 10),
     (30, 'Oreskis"',2, 7 );
+
+
+
+--Exercício 1--
