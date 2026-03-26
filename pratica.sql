@@ -150,3 +150,50 @@ INSERT INTO final_space_db.Character(
 
 
 --Exercício 1--
+USE final_space_db;
+-- Executar query aqui
+SELECT C.Name AS personagem, S.Specie_Name AS especie
+FROM `Character` AS C
+JOIN Specie AS S ON C.Specie = S.Specie_id;
+
+--Exercício 2--
+SELECT
+  C.Name AS personagem,
+  L.Location_Name AS origem
+FROM
+  `Character` AS C
+LEFT JOIN
+  Location AS L
+ON
+  C.Origin = L.Location_id;
+
+--Exercício 3--
+SELECT
+  C.Name AS personagem,
+  S.Specie_Name AS especie,
+  L.Location_Name AS origem
+FROM
+  `Character` AS C
+LEFT JOIN
+  Specie AS S
+ON
+  C.Specie = S.Specie_id
+LEFT JOIN
+  Location AS L
+ON
+  C.Origin = L.Location_id;
+
+--Exercício 4--
+SELECT
+  S.Specie_Name AS Especie,
+  COUNT(C.Character_id) AS Quantidade
+FROM
+  Specie AS S
+LEFT JOIN
+  `Character` AS C
+ON
+  S.Specie_id = C.Specie
+GROUP BY
+  S.Specie_id, S.Specie_Name
+ORDER BY
+  Quantidade ASC;
