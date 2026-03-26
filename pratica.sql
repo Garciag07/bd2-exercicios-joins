@@ -197,3 +197,19 @@ GROUP BY
   S.Specie_id, S.Specie_Name
 ORDER BY
   Quantidade ASC;
+
+
+SELECT
+  L.Location_Name AS 'Local de Origem',
+  COUNT(C.Character_id) AS Quantidade
+FROM
+  Location AS L
+LEFT JOIN
+  `Character` AS C
+ON
+  L.Location_id = C.Origin
+GROUP BY
+  L.`Location_id`
+ORDER BY
+  Quantidade DESC
+  LIMIT 5;
