@@ -238,3 +238,105 @@ RIGHT JOIN
     Location AS L ON C.Origin = L.Location_id
 ORDER BY 
     L.Location_Name;
+
+
+
+
+DROP SCHEMA IF EXISTS ComicCenter ;
+
+CREATE SCHEMA IF NOT EXISTS ComicCenter ;
+USE ComicCenter ;
+
+CREATE TABLE IF NOT EXISTS ComicCenter.Cliente (
+  Cliente_id INT NOT NULL AUTO_INCREMENT,
+  Nome VARCHAR(45) NOT NULL,
+  PRIMARY KEY (Cliente_id)
+);
+
+CREATE TABLE IF NOT EXISTS ComicCenter.Telefone (
+  Cliente_id INT NOT NULL,
+  Numero VARCHAR(45) NOT NULL,
+  PRIMARY KEY (Numero),
+  FOREIGN KEY (Cliente_id) REFERENCES ComicCenter.Cliente (Cliente_id)
+);
+
+CREATE TABLE IF NOT EXISTS ComicCenter.Email (
+  Cliente_id INT NOT NULL,
+  Cliente_email VARCHAR(45) NOT NULL,
+  PRIMARY KEY (Cliente_email),
+  FOREIGN KEY (Cliente_id) REFERENCES ComicCenter.Cliente (Cliente_id)
+);
+
+CREATE TABLE IF NOT EXISTS ComicCenter.Revista (
+  Revista_id INT NOT NULL,
+  Titulo VARCHAR(45) NOT NULL,
+  Editora VARCHAR(45) NOT NULL,
+  PRIMARY KEY (Revista_id)
+);
+
+INSERT INTO ComicCenter.Revista (Revista_id, Titulo, Editora) 
+  VALUES (1, 'Vingadores', 'Marvel'),
+         (2, 'Liga da Justiça', 'DC Comics'),
+         (3, 'Batman', 'DC Comics'),
+         (4, 'X-Men', 'Marvel'),
+         (5, 'Homem Aranha', 'Marvel'),
+         (6, 'Mulher Maravilha', 'DC Comics');
+
+
+USE ComicCenter;
+
+SELECT 
+    R1.Titulo, R1.Editora, R2.Titulo, R2.Editora
+FROM
+    Revista AS R1,
+    Revista AS R2
+WHERE
+    R1.Editora = R2.Editora 
+    AND R1.Revista_id < R2.Revista_id;
+
+USE ComicCenter;
+
+SELECT 
+    R1.Titulo, R1.Editora, R2.Titulo, R2.Editora
+FROM
+    Revista AS R1,
+    Revista AS R2
+WHERE
+    R1.Editora = R2.Editora
+        AND R1.Titulo <> R2.Titulo;
+
+
+--Exercício 1.2--
+USE final_space_db;
+
+SELECT 
+    C1.Name AS Personagem1,
+    C2.Name AS Personagem2,
+    L.Location_Name AS Local_Origem
+FROM 
+    `Character` AS C1
+JOIN 
+    `Character` AS C2 ON C1.Origin = C2.Origin AND C1.Character_id < C2.Character_id
+JOIN 
+    Location AS L ON C1.Origin = L.Location_id
+ORDER BY 
+    L.Location_Name, C1.Name;
+
+--Exercício 2.2--
+USE final_space_db;
+
+SELECT 
+    C1.Name AS Personagem1,
+    C2.Name AS Personagem2,
+    L.Location_Name AS Local_Origem
+FROM 
+    `Character` AS C1
+JOIN 
+    `Character` AS C2 ON C1.Origin = C2.Origin 
+                      AND C1.Character_id < C2.Character_id  -- Evita duplicatas e auto-comparação
+JOIN 
+    Location AS L ON C1.Origin = L.Location_id
+ORDER BY 
+    L.Location_Name, C1.Name;
+
+--Exercício 3.2--
