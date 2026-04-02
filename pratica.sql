@@ -1,3 +1,4 @@
+-- Active: 1775089473983@@127.0.0.1@3306@mysql
  SELECT 
     Cliente.Cliente_id, Cliente.Nome, Telefone.Numero
 
@@ -213,3 +214,27 @@ GROUP BY
 ORDER BY
   Quantidade DESC
   LIMIT 5;
+
+--Exercício 5--
+USE final_space_db;
+
+SELECT 
+    C.Name AS 'Character',
+    COALESCE(S.Specie_Name, 'Unknown') AS 'Specie'
+FROM 
+    `Character` AS C
+LEFT JOIN 
+    `Specie` AS S ON C.Specie = S.Specie_id;
+
+--Exercício 6--
+USE final_space_db;
+
+SELECT 
+    COALESCE(C.Name, 'Unknown') AS 'Character',
+    L.Location_Name AS 'Local'
+FROM 
+    `Character` AS C
+RIGHT JOIN 
+    Location AS L ON C.Origin = L.Location_id
+ORDER BY 
+    L.Location_Name;
