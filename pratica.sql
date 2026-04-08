@@ -770,3 +770,85 @@ LEFT JOIN
   Telefone AS T
 ON
   P.Telefone_ID = T.Telefone_ID;
+
+
+--Exercício 6--
+USE academia;
+
+SELECT
+  CONCAT(P1.Nome, ' ', P1.Sobrenome) AS `Pessoa 1`,
+  CONCAT(P2.Nome, ' ', P2.Sobrenome) AS `Pessoa 2`
+FROM
+  Pessoa_Associada AS P1
+JOIN
+  Pessoa_Associada AS P2
+ON
+  P1.Endereco_ID = P2.Endereco_ID
+  AND P1.Pessoa_Associada_ID < P2.Pessoa_Associada_ID;
+
+
+--Exercício 7--
+USE academia;
+
+SELECT
+  CONCAT(P1.Nome, ' ', P1.Sobrenome) AS `Treinador 1`,
+  CONCAT(P2.Nome, ' ', P2.Sobrenome) AS `Treinador 2`
+FROM
+  Pessoa_Treinadora AS P1
+JOIN
+  Pessoa_Treinadora AS P2
+ON
+  P1.Endereco_ID = P2.Endereco_ID
+  AND P1.Pessoa_Treinadora_ID < P2.Pessoa_Treinadora_ID;
+
+
+--Exercício 8--
+USE academia;
+
+SELECT
+  P.Nome_plano AS `Nome do Plano`,
+  COUNT(PA.Pessoa_Associada_ID) AS `Pessoas Inclusas`
+FROM
+  Plano AS P
+LEFT JOIN
+  Pessoa_Associada AS PA
+ON
+  P.Plano_ID = PA.Plano_ID
+GROUP BY
+  P.Plano_ID, P.Nome_plano;
+
+
+--Exercício 9--
+USE academia;
+
+SELECT
+  CONCAT(PA.Nome, ' ', PA.Sobrenome) AS `Nome Completo`,
+  H.Periodo AS `Período`
+FROM
+  Pessoa_Associada AS PA
+JOIN
+  Treino AS T
+ON
+  PA.Pessoa_Associada_ID = T.Pessoa_Associada_ID
+JOIN
+  Horario AS H
+ON
+  T.Horario_ID = H.Horario_ID;
+
+
+--Exercício 10--
+USE academia;
+
+SELECT
+  CONCAT(PA.Nome, ' ', PA.Sobrenome) AS `Nome Completo`,
+  IFNULL(H.Periodo, 'LIVRE') AS `Horario`
+FROM
+  Pessoa_Associada AS PA
+LEFT JOIN
+  Treino AS T
+ON
+  PA.Pessoa_Associada_ID = T.Pessoa_Associada_ID
+LEFT JOIN
+  Horario AS H
+ON
+  T.Horario_ID = H.Horario_ID;
