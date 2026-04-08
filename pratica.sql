@@ -690,3 +690,83 @@ INSERT INTO academia.Treino (
     (30, 5, 1),
     (31, 2, 3),
     (32, 1, 1);
+
+--Exercício 1--
+USE academia;
+
+SELECT
+  CONCAT(P.Nome, ' ', P.Sobrenome) AS `Nome Completo`,
+  E.Logradouro,
+  E.Numero
+FROM
+  Pessoa_Associada AS P
+JOIN
+  Endereco AS E
+ON
+  P.Endereco_ID = E.Endereco_ID;
+
+
+--Exercício 2--
+USE academia;
+
+SELECT
+  CONCAT(P.Nome, ' ', P.Sobrenome) AS `Nome Completo`,
+  PL.Nome_plano AS `Nome do Plano`
+FROM
+  Pessoa_Associada AS P
+JOIN
+  Plano AS PL
+ON
+  P.Plano_ID = PL.Plano_ID;
+
+
+--Exercício 3--
+USE academia;
+
+SELECT
+  CONCAT(P.Nome, ' ', P.Sobrenome) AS `Nome Completo`,
+  T.Telefone_Contato AS Telefone,
+  E.CEP AS `CEP`
+FROM
+  Pessoa_Associada AS P
+JOIN
+  Endereco AS E
+ON
+  P.Endereco_ID = E.Endereco_ID
+JOIN
+  Telefone AS T
+ON
+  P.Telefone_ID = T.Telefone_ID;
+
+
+--Exercício 4--
+USE academia;
+
+SELECT
+  CONCAT(P.Nome, ' ', P.Sobrenome) AS `Nome Completo`,
+  T.Telefone_Contato AS `Telefone de Contato`,
+  E.CEP AS CEP
+FROM
+  Pessoa_Associada AS P
+JOIN
+  Endereco AS E
+ON
+  P.Endereco_ID = E.Endereco_ID
+JOIN
+  Telefone AS T
+ON
+  P.Telefone_ID = T.Telefone_ID;
+
+
+--Exercício 5--
+USE academia;
+
+SELECT
+  CONCAT(P.Nome, ' ', P.Sobrenome) AS `Nome Completo`,
+  IFNULL(T.Telefone_Emergencia, 'PEDENTE') AS `Telefone de Emergência`
+FROM
+  Pessoa_Associada AS P
+LEFT JOIN
+  Telefone AS T
+ON
+  P.Telefone_ID = T.Telefone_ID;
