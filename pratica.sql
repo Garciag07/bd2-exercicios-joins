@@ -1,4 +1,4 @@
--- Active: 1775089473983@@127.0.0.1@3306@mysql
+-- Active: 1775678613132@@127.0.0.1@3306@ComicCenter
  SELECT 
     Cliente.Cliente_id, Cliente.Nome, Telefone.Numero
 
@@ -340,3 +340,29 @@ ORDER BY
     L.Location_Name, C1.Name;
 
 --Exercício 3.2--
+USE final_space_db;
+
+SELECT 
+    C1.Name AS Personagem1,
+    C2.Name AS Personagem2
+FROM 
+    `Character` AS C1
+JOIN 
+    `Character` AS C2 ON C1.Specie = C2.Specie 
+                      AND C1.Character_id < C2.Character_id
+ORDER BY 
+    C1.Name;
+
+--Exercício 4.2--
+USE final_space_db;
+
+SELECT 
+    C1.Name AS Personagem1,
+    C2.Name AS Personagem2
+FROM 
+    `Character` AS C1
+JOIN 
+    `Character` AS C2 ON C1.Specie = C2.Specie 
+                      AND C1.Character_id < C2.Character_id
+ORDER BY 
+    C1.Name;
